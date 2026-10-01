@@ -26,14 +26,14 @@ export default function App() { //App() is a component, since it returns jsx/tsx
 
       //turn raw JSON Data to readable object
 
-      const {results}: {results:Picture[]} = await rawData.json()
+      const {data}: {data:Picture[]} = await rawData.json()
       //everything that has been pulled is being put into data through setData
-      setData(results);
+      setData(data);
     }
     fetchData()
-        .then(()=> console.log("Working"))
+        .then(()=> console.log("success"))
         .catch((e) => console.error("The following error occurred: " +e));
-  }, [data]); //check if the length of the data from the API changed
+  }, [data.length]); //check if the length of the data from the API changed
 
 
   return (
