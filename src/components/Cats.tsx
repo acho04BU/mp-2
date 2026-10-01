@@ -8,7 +8,7 @@ const AllCharsDiv=styled.div`
     background-color: bisque;
 `;
 
-const SingleCharDiv=styled.div<{status: string}>`
+const SingleCharDiv=styled.div<{is_boosted: boolean}>`
     display: flex;
     flex-direction: column;   
     justify-content: center;
@@ -30,7 +30,7 @@ export default function Cats(props: {data:Picture[]}){
 
             {
                 props.data.map((pic: Picture) =>
-                    <SingleCharDiv key={pic.id}>
+                    <SingleCharDiv is_boosted={pic.is_boosted}>
                         <h1>{pic.title}</h1>
                         <p>{pic.is_boosted ? `boosted image`: `non-boosted image`}</p>
                         <img src={pic.thumbnail[0]} alt={pic.thumbnail[3]} />

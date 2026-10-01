@@ -33,7 +33,7 @@ export default function App() { //App() is a component, since it returns jsx/tsx
     fetchData()
         .then(()=> console.log("Working"))
         .catch((e) => console.error("The following error occurred: " +e));
-  }, [data.length]);
+  }, [data]); //check if the length of the data from the API changed
 
 
   return (
