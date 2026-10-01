@@ -25,7 +25,9 @@ const SingleCharDiv=styled.div<{status: string}>`
 export default function Cats(props: {data:Picture[]}){
 
     return (
+
         <AllCharsDiv>
+
             {
                 props.data.map((pic: Picture) =>
                     <SingleCharDiv key={pic.id}>

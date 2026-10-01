@@ -3,6 +3,13 @@ import {type Picture} from "./types/Picture.ts";
 import styled from 'styled-components';
 import Cats from "./components/Cats.tsx"
 
+
+const ParentDiv=styled.div`
+    width: 80vw;
+    margin: auto;
+    border: 5px green solid;
+`;
+
 export default function App() { //App() is a component, since it returns jsx/tsx
 
   const[data, setData] = useState<Picture[]>([]); //useState is a hook (preprogrammed helper function)
@@ -11,13 +18,6 @@ export default function App() { //App() is a component, since it returns jsx/tsx
   // make http call using fetch, await, and handling exceptions
 
   //handling exception is done through useEffect
-
-  const ParentDiv=styled.div`
-    width: 80vw;
-    margin: auto;
-    border: 5px green solid;
-`;
-
 
   useEffect(()=> { //async tells the page to do the tasks after first, then come back to the async function
     async function fetchData(){
