@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {type Picture} from "./types/Picture.ts";
+import {type Picture, type FinishedPicture} from "./types/Picture.ts";
 import styled from 'styled-components';
 import Cats from "./components/Cats.tsx"
 
@@ -12,7 +12,7 @@ const ParentDiv=styled.div`
 
 export default function App() { //App() is a component, since it returns jsx/tsx
 
-  const[data, setData] = useState<Picture[]>([]); //useState is a hook (preprogrammed helper function)
+  const[data, setData] = useState<FinishedPicture[]>([]); //useState is a hook (preprogrammed helper function)
   //if first value is named x, the second must be setX
 
   // make http call using fetch, await, and handling exceptions
@@ -25,10 +25,34 @@ export default function App() { //App() is a component, since it returns jsx/tsx
       const rawData = await fetch("https://api.artic.edu/api/v1/artworks/search?q=cats");
 
       //turn raw JSON Data to readable object
+      const data = (await rawData.json()).data;
 
-      const {data}: {data:Picture[]} = await rawData.json()
+      let x:FinishedPicture[] = [];
+      var y: FinishedPicture;
+      data.map((pic: Picture) =>
+          {
+            try{
+              y = {
+                id: pic.id,
+                is_boosted: pic.is_boosted,
+                alt_text: pic.thumbnail.alt_text,
+                height: pic.thumbnail.height,
+                lqip: pic.thumbnail.lqip,
+                width: pic.thumbnail.width,
+                title: pic.title
+              };
+              x.push(y);
+            }catch{
+              console.warn("missing data; skipping");
+            }
+          }
+      ) //Map doesn't return anything, it just does the code inside with the given array
+      setData(x);
+
+
       //everything that has been pulled is being put into data through setData
-      setData(data);
+      console.log(data);
+      //console.log(data[0]["thumbnail"]["lqip"]);
     }
     fetchData()
         .then(()=> console.log("success"))
@@ -38,7 +62,7 @@ export default function App() { //App() is a component, since it returns jsx/tsx
 
   return (
     <ParentDiv>
-      <Cats data={data}/>
+      <Cats finishedData={data}/>
     </ParentDiv>
   )
 }

@@ -1,9 +1,23 @@
 export type Picture = {
+    id:number;
+    is_boosted:boolean;
+    thumbnail:Thumbnail;
     title: string;
+}
+
+type Thumbnail = {
+    alt_text: string;
+    height: number;
     lqip: string;
     width: number;
-    height: number;
-    alt_text: string;
+}
+
+export type FinishedPicture = {
+    id: number;
     is_boosted:boolean;
-    id:number;
+    alt_text:string;
+    height:number;
+    lqip: string;
+    width:number;
+    title: string;
 }

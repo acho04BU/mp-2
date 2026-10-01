@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {type Picture} from "../types/Picture.ts";
+import {type FinishedPicture} from "../types/Picture.ts";
 
 const AllCharsDiv=styled.div`
     display: flex;
@@ -22,19 +22,27 @@ const SingleCharDiv=styled.div<{is_boosted: string}>`
     text-align: center;
 `;
 
-export default function Cats(props: {data:Picture[]}){
 
+
+
+
+
+
+export default function Cats(props: {finishedData:FinishedPicture[]}){
+    console.log(props.finishedData[0]);
+    //console.log(props.finishedData[0].thumbnail.title);
     return (
 
         <AllCharsDiv>
 
             {
-                props.data.map((pic: Picture) =>
+                props.finishedData.map((pic: FinishedPicture) =>
                     <SingleCharDiv key={pic.id} is_boosted={(pic.is_boosted).toString()}>
                         <h1>{pic.title}</h1>
                         <p>{pic.is_boosted ? `boosted image`: `non-boosted image`}</p>
-                        <img src={pic.lqip} alt={pic.alt_text} />
+                        <img key = {pic.id} src={pic.lqip} alt={pic.alt_text} />
                     </SingleCharDiv>
+
                 )
             }
         </AllCharsDiv>
